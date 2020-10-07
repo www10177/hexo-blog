@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Ristw.dev
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
-language: en
+author: Rist
+language: zh
 timezone: ''
 
 # URL
@@ -103,4 +103,11 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: rsync
+  host: 168.138.192.39
+  user: www10177
+  root: /var/www/html/hexo/
+  port: 22
+  delete: true
+  verbose: true
+  ignore_errors: false
