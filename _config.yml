@@ -103,11 +103,9 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: rsync
+  type: sftp
   host: 168.138.192.39
   user: www10177
-  root: /var/www/html/hexo/
+  remotePath: /var/www/html/hexo
   port: 22
-  delete: true
-  verbose: true
-  ignore_errors: false
+  privateKey: ~/.ssh/id_rsa
