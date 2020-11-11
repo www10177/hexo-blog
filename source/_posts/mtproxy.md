@@ -4,21 +4,21 @@ tags:
   - Telegram
 id: '13'
 categories:
-  - - Proxy
+  - - Web
 date: 2020-05-15 22:34:07
 ---
 
 前陣子因Line官方帳號收費機制更改之緣故，許多企業和非營利組織開始開設Telegram帳號，同時也使台灣的Telegram用戶增加許多。
 
-![](https://ristw.dev/wp-content/uploads/2020/05/image.png)
+![Telegram](https://od.ristw.dev/?/2020/MTProxy/image.png)
 
-[Telegram](https://telegram.org/)
+
 
 但不知道在使用Telegram時是否會覺得有點卡卡的，傳圖或貼圖都要load一小陣子，無論用行動網路或固網無法隨傳隨到。原先筆者以為僅是因近期台灣TG用戶數提升所造成的，後來在TG群組內看到討論才知道原來TG的台灣區對應的Server在新加坡，而又對該處的線路似乎爛很久了(未查證，不大確定消息來源，就當都市傳說看吧w)，導致TG台灣連線不時會覺得頓頓卡卡的
 <!-- more -->
 所幸的是官方有釋出[MTProxy](https://github.com/TelegramMessenger/MTProxy)，針對Telegram所設計的MTProto Proxy，你可以選擇使用網路上公開他人所架設的Proxy，像[這個頻道](https://t.me/s/MTProtoProxies)內不定時會提供許多Proxy，使用方法也很簡單，點下Connect後確定即可。
 
-![](https://ristw.dev/wp-content/uploads/2020/05/image-1.png)
+![](https://od.ristw.dev/?/2020/MTProxy/image-1.png)
 
 Free MTProto Proxy Channel
 
@@ -32,7 +32,7 @@ Free MTProto Proxy Channel
 
 不過個人最推薦的還是Oracle OCI，目前綁卡進去是終身免費兩個Instances(不確定未來是否會更改)，付費要另外升級帳戶，不用擔心額度超過被誤收，提供的instance以Proxy來說很夠用了，唯一缺點大概就是中國台灣可能會收到業務的推銷電話。Google一下應該也會有很多OCI開設教學，唯一要特別留意的大概就是一開始註冊帳號選定的地區是跟你免費主機地區綁死的（印象中我是選JP）
 
-  
+
 開好主機後留意一下VPS設定頁面防火牆的Port 443是否有記得開啟，或者你也可以像我一樣很懶得Port全開再用UFW來控管(X)  
 **務必確定主機的443 port有開啟**  
 **sudo ufw allow 443**  
@@ -42,7 +42,7 @@ Free MTProto Proxy Channel
 
 ## 2.Installation
 
-  
+
 想辦法用SSH連進去主機後輸入下列指令(OS : Ubuntu)  
 \- Install dependencies  
 \- Clone Codes  
@@ -76,7 +76,7 @@ sudo /opt/MTProxy/mtproto-proxy -u nobody -p 8888 -H 443 -S <亂數secret> --aes
 需特別留意的是，一般VPS(AWS,OCI確定都有)會過NAT，所以會需要在最後加上參數 --nat-info  
 Private IP 和Public IP應該在各自VPS的機器面板那邊可以查到
 
-![](https://ristw.dev/wp-content/uploads/2020/05/註解-2020-05-15-214356-3-1024x183-1.png)
+![](https://od.ristw.dev/?/2020/MTProxy/註解-2020-05-15-214356-3-1024x183-1.png)
 
 Public IP and Private IP (圖為AWS之面版)
 
@@ -84,7 +84,7 @@ Public IP and Private IP (圖為AWS之面版)
 
 tg://proxy?server=PUBLIC\_IP&port=443&secret=<亂數SECRET>
 
-  
+
 在任一Telegram Client中開啟連結即可加入proxy測試，若無法連線的話可以從下列方向下去查  
 \- Private IP設定錯誤(NAT)  
 \- 443 port 沒開(ubuntu裡 ufw或iptables, VPS那邊的設定面板)
@@ -108,7 +108,7 @@ Restart=on-failure
 \[Install\]
 WantedBy=multi-user.target
 
-  
+
 reload 和測試daemon
 
 sudo systemctl daemon-reload

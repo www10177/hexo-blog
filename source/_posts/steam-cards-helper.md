@@ -4,7 +4,6 @@ tags: []
 id: '252'
 categories:
   - - Game
-  - - game
     - Steam
 date: 2020-06-14 18:06:17
 ---
@@ -23,7 +22,7 @@ date: 2020-06-14 18:06:17
 *   合卡所需寶珠數是根據該遊戲的總卡數而不同，總卡數越多需要的寶珠越少
 
   
-  
+
   
 
 而會在市集上購買卡片的族群大都是收藏或合徽章用，由於必須要擁有該遊戲才能合卡包，以下列出幾點我挑遊戲的看法
@@ -44,9 +43,9 @@ date: 2020-06-14 18:06:17
     
 
   
+
   
-  
-  
+
 
 我約莫是上次冬特開始操作的，印象中當初計算一天獲利約20-30twd, 最後獲利至少可以把純粹合卡遊戲的本體成本(打平後額外賺了約莫1k-2k，不過都是以前了，近幾個月沒有標的ww**(除了P4G)**，以下為我個人之前的操作方法
 
@@ -64,7 +63,7 @@ date: 2020-06-14 18:06:17
 目前僅能在台區的steam使用(市集預設價格是以台幣計價)，其他地區計算可能會有錯誤  
 若對Code有疑慮的話同時也有開源在[Github](https://github.com/www10177/SteamCardsHelper)上，也歡迎來給顆Star
 
-![](https://ristw.dev/wp-content/uploads/2020/06/p4g.jpg)
+![](https://od.ristw.dev/?/2020/SteamCardHelper/p4g.jpg)
 
 [Steam Inventory Helper](https://chrome.google.com/webstore/detail/steam-inventory-helper/cmeakgjggjdlcpncigglobpjbkabhmjl)：批次販售卡片，能自動代入市場價格，印象中也能夠批次開卡包，每天拆完卡包後就靠這個直接賣
 
