@@ -10,7 +10,7 @@ date: 2020-05-15 22:34:07
 
 前陣子因Line官方帳號收費機制更改之緣故，許多企業和非營利組織開始開設Telegram帳號，同時也使台灣的Telegram用戶增加許多。
 
-![Telegram](https://od.ristw.dev/?/2020/MTProxy/image.png)
+![Telegram](image.png)
 
 
 
@@ -18,7 +18,7 @@ date: 2020-05-15 22:34:07
 <!-- more -->
 所幸的是官方有釋出[MTProxy](https://github.com/TelegramMessenger/MTProxy)，針對Telegram所設計的MTProto Proxy，你可以選擇使用網路上公開他人所架設的Proxy，像[這個頻道](https://t.me/s/MTProtoProxies)內不定時會提供許多Proxy，使用方法也很簡單，點下Connect後確定即可。
 
-![](https://od.ristw.dev/?/2020/MTProxy/image-1.png)
+![](image-1.png)
 
 Free MTProto Proxy Channel
 
@@ -76,7 +76,7 @@ sudo /opt/MTProxy/mtproto-proxy -u nobody -p 8888 -H 443 -S <亂數secret> --aes
 需特別留意的是，一般VPS(AWS,OCI確定都有)會過NAT，所以會需要在最後加上參數 --nat-info  
 Private IP 和Public IP應該在各自VPS的機器面板那邊可以查到
 
-![](https://od.ristw.dev/?/2020/MTProxy/註解-2020-05-15-214356-3-1024x183-1.png)
+![](2020-05-15-214356-3-1024x183-1.png)
 
 Public IP and Private IP (圖為AWS之面版)
 

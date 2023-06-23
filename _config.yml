@@ -41,7 +41,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -103,10 +103,7 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: sftp
-  host: 168.138.192.39
-  user: www10177
-  remotePath: /var/www/html/hexo
-  forceUpload: true
-  port: 22
-  privateKey: ./hexo-key
+  type: git
+  repo: https://github.com/www10177/hexo-blog.git #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
+  branch: master
+  message: 	"Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
