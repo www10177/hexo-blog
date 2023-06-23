@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ristw.dev","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前陣子因Line官方帳號收費機制更改之緣故，許多企業和非營利組織開始開設Telegram帳號，同時也使台灣的Telegram用戶增加許多。  但不知道在使用Telegram時是否會覺得有點卡卡的，傳圖或貼圖都要load一小陣子，無論用行動網路或固網無法隨傳隨到。原先筆者以為僅是因近期台灣TG用戶數提升所造成的，後來在TG群組內看到討論才知道原來TG的台灣區對應的Server在新加坡，而又對該處的線">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Telegram 加速器：MTProxy">
+<meta property="og:url" content="http://ristw.dev/mtproxy/index.html">
+<meta property="og:site_name" content="Ristw.dev">
+<meta property="og:description" content="前陣子因Line官方帳號收費機制更改之緣故，許多企業和非營利組織開始開設Telegram帳號，同時也使台灣的Telegram用戶增加許多。  但不知道在使用Telegram時是否會覺得有點卡卡的，傳圖或貼圖都要load一小陣子，無論用行動網路或固網無法隨傳隨到。原先筆者以為僅是因近期台灣TG用戶數提升所造成的，後來在TG群組內看到討論才知道原來TG的台灣區對應的Server在新加坡，而又對該處的線">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://ristw.dev/mtproxy/image.png">
+<meta property="og:image" content="http://ristw.dev/mtproxy/image-1.png">
+<meta property="og:image" content="http://ristw.dev/mtproxy/2020-05-15-214356-3-1024x183-1.png">
+<meta property="article:published_time" content="2020-05-15T14:34:07.000Z">
+<meta property="article:modified_time" content="2021-03-12T15:55:50.991Z">
+<meta property="article:author" content="Rist">
+<meta property="article:tag" content="Telegram">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ristw.dev/mtproxy/image.png">
+
+
+<link rel="canonical" href="http://ristw.dev/mtproxy/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://ristw.dev/mtproxy/","path":"mtproxy/","title":"Telegram 加速器：MTProxy"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Telegram 加速器：MTProxy | Ristw.dev</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ristw.dev</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-VPS"><span class="nav-number">1.</span> <span class="nav-text">1. VPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Installation"><span class="nav-number">2.</span> <span class="nav-text">2.Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Daemon"><span class="nav-number">3.</span> <span class="nav-text">3.Daemon</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rist</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://ristw.dev/mtproxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rist">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ristw.dev">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Telegram 加速器：MTProxy | Ristw.dev">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Telegram 加速器：MTProxy
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-05-15 14:34:07" itemprop="dateCreated datePublished" datetime="2020-05-15T14:34:07+00:00">2020-05-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-03-12 15:55:50" itemprop="dateModified" datetime="2021-03-12T15:55:50+00:00">2021-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>前陣子因Line官方帳號收費機制更改之緣故，許多企業和非營利組織開始開設Telegram帳號，同時也使台灣的Telegram用戶增加許多。</p>
+<p><img src="image.png" alt="Telegram"></p>
+<p>但不知道在使用Telegram時是否會覺得有點卡卡的，傳圖或貼圖都要load一小陣子，無論用行動網路或固網無法隨傳隨到。原先筆者以為僅是因近期台灣TG用戶數提升所造成的，後來在TG群組內看到討論才知道原來TG的台灣區對應的Server在新加坡，而又對該處的線路似乎爛很久了(未查證，不大確定消息來源，就當都市傳說看吧w)，導致TG台灣連線不時會覺得頓頓卡卡的</p>
+<a id="more"></a>
+<p>所幸的是官方有釋出<a target="_blank" rel="noopener" href="https://github.com/TelegramMessenger/MTProxy">MTProxy</a>，針對Telegram所設計的MTProto Proxy，你可以選擇使用網路上公開他人所架設的Proxy，像<a target="_blank" rel="noopener" href="https://t.me/s/MTProtoProxies">這個頻道</a>內不定時會提供許多Proxy，使用方法也很簡單，點下Connect後確定即可。</p>
+<p><img src="image-1.png"></p>
+<p>Free MTProto Proxy Channel</p>
+<p>而使用這些免費Proxy代價是在連線該Proxy時，聊天頁面可能會出現Proxy 提供者所設定之廣告頻道，而訊息安全性的部分，雖稍微翻一下TG的<a target="_blank" rel="noopener" href="https://core.telegram.org/mtproto">MTProto</a>，看起來就算是過Proxy應該是沒啥問題（但非我的專業領域，如有誤歡迎更正）。個人使用這種公開Proxy的小感想：Ping略高，但因TG對延遲的要求並不重要所以沒差；廣告Channel可能會有阿拉伯人的刮痧拔罐(?)賣藥廣告，看了其實有點恐怖w；有時可能會三不五時無法連線，這倒是對使用體驗比較有影響，或者偶爾得換換Proxy試試</p>
+<p>但若你像我一樣是個中重度TG用戶、有點資安潔癖（不想要封包過他人的Proxy）、不想透過網路上打包好的Scipts一鍵安裝，你可以選擇使用以下的簡易介紹架設自己的MTProxy</p>
+<h2 id="1-VPS"><a href="#1-VPS" class="headerlink" title="1. VPS"></a>1. VPS</h2><p>你可以用<a target="_blank" rel="noopener" href="https://cloud.google.com/gcp/getting-started?hl=zh-tw">Google GCP</a>, <a target="_blank" rel="noopener" href="https://aws.amazon.com/tw/ec2/">Amazon AWS</a>, <a target="_blank" rel="noopener" href="https://www.oracle.com/tw/cloud/free/">Oracle OCI</a>, 前兩者第一次使用綁信用卡應該都會有免費額度，AWS亦可用edu信箱搭Github Student Pack領免費額度，抑或者也可以選擇一些便宜的VPS主機商Digital Ocean, Bandwangon之類的</p>
+<p>不過個人最推薦的還是Oracle OCI，目前綁卡進去是終身免費兩個Instances(不確定未來是否會更改)，付費要另外升級帳戶，不用擔心額度超過被誤收，提供的instance以Proxy來說很夠用了，唯一缺點大概就是中國台灣可能會收到業務的推銷電話。Google一下應該也會有很多OCI開設教學，唯一要特別留意的大概就是一開始註冊帳號選定的地區是跟你免費主機地區綁死的（印象中我是選JP）</p>
+<p>開好主機後留意一下VPS設定頁面防火牆的Port 443是否有記得開啟，或者你也可以像我一樣很懶得Port全開再用UFW來控管(X)<br><strong>務必確定主機的443 port有開啟</strong><br><strong>sudo ufw allow 443</strong><br>*(OCI可能需要需要移除iptables改用ufw以刪除oracle預先加入的防火牆規則, <a target="_blank" rel="noopener" href="https://hiraku.tw/2020/04/6171/">ref. link</a>)</p>
+<p>這邊我預設讀者有能力自行處理完畢，或者等我改天心情好再來寫一篇OCI簡單開設的教學(X)</p>
+<h2 id="2-Installation"><a href="#2-Installation" class="headerlink" title="2.Installation"></a>2.Installation</h2><p>想辦法用SSH連進去主機後輸入下列指令(OS : Ubuntu)<br>- Install dependencies<br>- Clone Codes<br>- Build</p>
+<p>sudo apt install git curl build-essential libssl-dev zlib1g-dev<br>git clone <a target="_blank" rel="noopener" href="https://github.com/TelegramMessenger/MTProxy">https://github.com/TelegramMessenger/MTProxy</a><br>cd MTProxy<br>make &amp;&amp; cd objs/bin</p>
+<p>完成後會看到編譯完的執行檔(mtproto-proxy)<br>在/opt建立MTProxy資料夾並將執行檔Copy至此</p>
+<p>sudo mkdir /opt/MTProxy<br>sudo cp mtproto-proxy /opt/MTProxy<br>cd /opt/MTProxy</p>
+<p>向TG Server 索取ProxySecret和ConfigSample<br>產生用來連線到Proxy的亂數Secret<br>最後產生出來的一串亂數請先複製起來，待會建立Daemon會用到</p>
+<p>sudo curl -s <a target="_blank" rel="noopener" href="https://core.telegram.org/getProxySecret">https://core.telegram.org/getProxySecret</a> -o proxy-secret<br>sudo curl -s <a target="_blank" rel="noopener" href="https://core.telegram.org/getProxyConfig">https://core.telegram.org/getProxyConfig</a> -o proxy-multi.conf<br>head -c 16 /dev/urandom  xxd -ps</p>
+<p>基本上現在就可以透過</p>
+<p>sudo /opt/MTProxy/mtproto-proxy -u nobody -p 8888 -H 443 -S &lt;亂數secret&gt; –aes-pwd proxy-secret proxy-multi.conf -M 1 –nat-info <PRIVATE IP>:<PUBLIC IP></p>
+<p>這樣的指令來直接呼叫執行proxy<br>需特別留意的是，一般VPS(AWS,OCI確定都有)會過NAT，所以會需要在最後加上參數 –nat-info<br>Private IP 和Public IP應該在各自VPS的機器面板那邊可以查到</p>
+<p><img src="2020-05-15-214356-3-1024x183-1.png"></p>
+<p>Public IP and Private IP (圖為AWS之面版)</p>
+<p>完成後即可透過下面的連結(記得替換)或者是透過 <a target="_blank" rel="noopener" href="https://t.me/MTProxybot">@MTProxybot</a>來建立下列的link</p>
+<p>tg://proxy?server=PUBLIC_IP&amp;port=443&amp;secret=&lt;亂數SECRET&gt;</p>
+<p>在任一Telegram Client中開啟連結即可加入proxy測試，若無法連線的話可以從下列方向下去查<br>- Private IP設定錯誤(NAT)<br>- 443 port 沒開(ubuntu裡 ufw或iptables, VPS那邊的設定面板)</p>
+<p>但上述直接執行若是server重開、ssh斷掉之類的情況會導致proxy停掉，故以下建立daemon</p>
+<h2 id="3-Daemon"><a href="#3-Daemon" class="headerlink" title="3.Daemon"></a>3.Daemon</h2><p>sudo nano /etc/systemd/system/MTProxy.service</p>
+<p>在編輯器裡貼上以下設定檔，記得要替換掉剛剛亂數Secret和IP，完成後存檔即可</p>
+<p>[Unit]<br>Description=MTProxy<br>After=network.target<br>[Service]<br>Type=simple<br>WorkingDirectory=/opt/MTProxy<br>ExecStart=/opt/MTProxy/mtproto-proxy -u nobody -p 8888 -H 443 -S &lt;亂數secret&gt; –aes-pwd proxy-secret proxy-multi.conf -M 1 –nat-info <PRIVATE IP>:<PUBLIC IP><br>Restart=on-failure<br>[Install]<br>WantedBy=multi-user.target</p>
+<p>reload 和測試daemon</p>
+<p>sudo systemctl daemon-reload<br>sudo systemctl restart MTProxy.service<br>sudo systemctl status MTProxy.service</p>
+<p>沒意外的話應該會看到active(running)之類的字樣，沒問題再將其加入開機自動啟動即可</p>
+<p>systemctl enable MTProxy.service</p>
+<p>Reference:<br><a target="_blank" rel="noopener" href="https://github.com/TelegramMessenger/MTProxy">https://github.com/TelegramMessenger/MTProxy</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Telegram/" rel="tag"># Telegram</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/subscribing-services-list/" rel="next" title="Subscribing Services  List">
+                  Subscribing Services  List <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rist</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
