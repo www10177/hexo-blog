@@ -1,5 +1,4 @@
-.github/workflows/deploy-to-github.yml
-name: Pages
+name: deploy-to-github
 
 on:
   push:
